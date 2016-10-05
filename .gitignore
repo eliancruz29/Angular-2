@@ -18,7 +18,11 @@ coverage
 .nyc_output
 
 # the folder typings
-typings/* 
+typings/*
+
+# javascript files
+*.js
+*.js.*
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
