@@ -1,6 +1,6 @@
 # Introduction-Angular-2
 
-The tutorial is "Introduction to Angular 2" watched at Microsoft Virtual Academy
+The tutorial is "THE HERO EDITOR" watched at Official angular page
 
 When download the project ensure that you have the nodejs version 5.x.x or higher and npm version 3.x.x or higher.
 You can confirm the version by typing node -v, and npm -v
