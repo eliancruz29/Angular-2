@@ -8,7 +8,7 @@ import { HeroService } from '../services/hero.service';
   selector: 'my-heroes',
   moduleId: module.id,
   templateUrl: '../views/heroes.component.html',
-  styleUrls: [ '../styles/heroes.component.css' ]
+  styleUrls: ['../styles/heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
@@ -16,18 +16,37 @@ export class HeroesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroService) { }
-
-  getHeroes(): void {
-    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
-  }
+    private heroService: HeroService
+  ) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
+  getHeroes(): void {
+    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+  }
+
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+  }
+
+  delete(hero: Hero): void {
+    this.heroService.delete(hero.id)
+      .then(() => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null; }
+      });
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.create(name)
+      .then(hero => {
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
   }
 
   gotoDetail(): void {

@@ -10,17 +10,16 @@ import { Hero } from '../models/hero';
   selector: 'my-hero-detail',
   moduleId: module.id,
   templateUrl: '../views/hero-detail.component.html',
-  styleUrls: [ '../styles/hero-detail.component.css' ]
+  styleUrls: ['../styles/hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
+  hero: Hero;
+
   constructor(
     private heroService: HeroService,
     private route: ActivatedRoute,
     private location: Location
-  ) { }
-
-  @Input()
-  hero: Hero;
+  ) {}
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
@@ -28,6 +27,11 @@ export class HeroDetailComponent implements OnInit {
       this.heroService.getHero(id)
         .then(_hero => this.hero = _hero);
     });
+  }
+
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
   }
 
   goBack(): void {
